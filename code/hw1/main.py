@@ -1,9 +1,6 @@
 import argparse
-import sys
-import time
 import threading
 import socketserver
-from ctypes.wintypes import tagMSG
 
 from dnslib import *
 
