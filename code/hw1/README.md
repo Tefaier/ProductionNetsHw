@@ -4,10 +4,10 @@
 При запуске позволяет конфигурировать:
 - --host на каком хосту слушать
 - --port на каком порту слушать
-- --from с какого доменного имени оправлять (верхнее соответствие)
-- --to на какой адрес отправлять
+- --config_path путь от коммандной строки запуска к файлу конфига
 
 Скорее всего нужно будет запускать с правами sudo, потому что надо слушать порт 53 (если есть возможность чтобы dns запросы шли по другому, то установить и другой порт для программы) \
 В /etc/resolv.conf должна быть строчка "nameserver <--host>" \
 \
-Демонстрацию можно посмотреть по ссылке [google drive](https://drive.google.com/file/d/1WE1WN2PZuM3tswxFu7l-KwGcFGkvZhaN/view?usp=sharing)
+Демонстрацию можно посмотреть по ссылке [google drive](https://drive.google.com/file/d/1WE1WN2PZuM3tswxFu7l-KwGcFGkvZhaN/view?usp=sharing) \
+Запустить можно через "sudo .venv/bin/python ./code/hw1/main.py --host=127.0.0.2 --config_path=./configs/hw1.dns" из родительской папки проекта
