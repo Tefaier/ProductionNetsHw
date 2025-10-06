@@ -3,6 +3,7 @@ import threading
 import socketserver
 
 from dnslib import *
+import sys
 
 import server
 from server import UDPRequestHandler, DomainName
