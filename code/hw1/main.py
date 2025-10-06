@@ -13,18 +13,17 @@ def main():
     parser = argparse.ArgumentParser(description='Start a DNS implemented in Python.')
     parser.add_argument('--host', default='127.0.0.1', type=str, help='The host to listen on')
     parser.add_argument('--port', default=53, type=int, help='The port to listen on')
-    parser.add_argument('--from', default='example.com', type=str, help='Name which to redirect', dest="from_arg")
-    parser.add_argument('--to', default="127.0.0.1", type=str, help='The ipv4 where to redirect')
+    parser.add_argument('--config_path', type=str, help='Configuration path', dest="path")
 
     args = parser.parse_args()
 
-    D = DomainName(f"{args.from_arg}.")
-    redirect_to = args.to
+    records = {}
+    with open(args.path, "r") as file:
+        for line in file.readlines():
+            domain, redirect = line.split(" ")
+            records[f"{domain}."] = [A(redirect)]
 
-    server.domain = D
-    server.records = {
-        D: [A(redirect_to), AAAA((0,) * 16)],
-    }
+    server.records = records
 
     print("Starting nameserver...")
 
