@@ -1,12 +1,17 @@
 import datetime
+import socket
 import socketserver
+from http.client import responses
+
 from dnslib import *
+import requests
 
 
 class DomainName(str):
     def __getattr__(self, item):
         return DomainName(item + '.' + self)
 
+upstream_dns = None
 records = {}
 TTL = 60 * 5
 
@@ -34,7 +39,15 @@ def dns_response(data):
                     reply.add_answer(RR(rname=qname, rtype=getattr(QTYPE, rqt), rclass=1, ttl=TTL, rdata=rdata))
 
     if not matched:
-        reply.header.rcode = 5 # REFUSED
+        if upstream_dns:
+            try:
+                print("\n---- Reply:\n obsolete - redirect was used")
+                return request.send(upstream_dns, 53, timeout=2)
+            except Exception as e:
+                print(f"\nUpstream DNS query failed: {e}")
+                reply.header.rcode = 2
+        else:
+            reply.header.rcode = 5
 
     print("\n---- Reply:\n", reply)
     return reply.pack()

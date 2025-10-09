@@ -19,8 +19,15 @@ def main():
 
     records = {}
     with open(args.path, "r") as file:
-        for line in file.readlines():
+        for (i, line) in enumerate(file.readlines()):
+            split = line.split(" ")
+            if len(split) != 2:
+                continue
             domain, redirect = line.split(" ")
+            redirect = redirect.strip().replace("\n", "")
+            if i == 0 and domain == "upstream":
+                server.upstream_dns = redirect
+                continue
             records[f"{domain}."] = [A(redirect)]
 
     server.records = records
