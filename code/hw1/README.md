@@ -10,5 +10,5 @@
 В /etc/resolv.conf должна быть строчка "nameserver <--host>" \
 В конфиге если первой строчкой указать `upstream <port>` то будет перенаправка запроса другому DNS серверу, если этот не может ответить \
 \
-Демонстрацию можно посмотреть по ссылке [google drive](https://drive.google.com/file/d/1WE1WN2PZuM3tswxFu7l-KwGcFGkvZhaN/view?usp=sharing) \
+Демонстрацию можно посмотреть по ссылке [google drive](https://drive.google.com/file/d/1_SXdIvrCc_SFCGKnZ0IIkEnhqgokhm7l/view?usp=sharing) \
 Запустить можно через "sudo .venv/bin/python ./code/hw1/main.py --host=127.0.0.2 --config_path=./configs/hw1.dns" из родительской папки проекта
